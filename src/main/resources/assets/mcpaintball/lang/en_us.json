@@ -50,6 +50,7 @@
   "subtitle.mcpaintball.single": "Paintball Fired",
   "subtitle.mcpaintball.ding": "Shot Hit",
   "subtitle.mcpaintball.splat": "Paintball Splat",
-  "subtitle.mcpaintball.set": "C4 Target Set",
+  "subtitle.mcpaintball.set": "C4 Target Added",
+  "subtitle.mcpaintball.rem": "C4 Target Removed",
   "subtitle.mcpaintball.det": "Detonate C4"
 }

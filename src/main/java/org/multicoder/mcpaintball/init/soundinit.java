@@ -18,6 +18,8 @@ public class soundinit
 
     public static final RegistryObject<SoundEvent> SET = RegSound("set");
 
+    public static final RegistryObject<SoundEvent> REM = RegSound("rem");
+
     public static final RegistryObject<SoundEvent> DET = RegSound("det");
 
     public static RegistryObject<SoundEvent> RegSound(String name)

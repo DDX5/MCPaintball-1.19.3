@@ -2,6 +2,8 @@ package org.multicoder.mcpaintball.item.utility;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -36,80 +38,63 @@ public class BlueRemote extends Item
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand)
     {
-        if(!pLevel.isClientSide())
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+        CompoundTag Tag = stack.getOrCreateTag();
+        if(pPlayer.isCrouching() && Tag.contains("Targets"))
         {
-            ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-            CompoundTag Tag = stack.getTag();
-            if(Tag == null)
-            {
-                return InteractionResultHolder.fail(stack);
-            }
-            if(Tag.contains("Targets"))
-            {
-                if (pPlayer.isCrouching())
-                {
-                    String[] Targets = Tag.getString("Targets").split("/");
-                    for (String Target : Targets)
-                    {
-                        String[] Pos = Target.split(",");
-                        BlockPos Position = new BlockPos(Integer.parseInt(Pos[0]), Integer.parseInt(Pos[1]), Integer.parseInt(Pos[2]));
-                        pLevel.explode(null, Position.getX(), Position.getY(), Position.getZ(), 5.0f, Level.ExplosionInteraction.BLOCK);
+            pLevel.playSound(pPlayer,pPlayer.blockPosition(),soundinit.DET.get(),SoundSource.PLAYERS,0.5f,1f);
+            ListTag Targets = Tag.getList("Targets", 8);
+            Targets.forEach(
+                    tag -> {
+                        String[] Pos = tag.getAsString().split(",");
+                        BlockPos Position = new BlockPos(Integer.parseInt(Pos[0]),Integer.parseInt(Pos[1]),Integer.parseInt(Pos[2]));
+                        pLevel.explode(null,Position.getX(),Position.getY(),Position.getZ(),5f, Level.ExplosionInteraction.TNT);
                     }
-                    stack.setTag(null);
-                }
-            }
-        }
-        else
-        {
-            if(pPlayer.isCrouching())
-            {
-                pLevel.playSound(pPlayer,pPlayer.getOnPos(),soundinit.DET.get(), SoundSource.PLAYERS,0.5f,1.0f);
-            }
+            );
+            stack.setTag(null);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 
-
     @Override
     public InteractionResult useOn(UseOnContext pContext)
     {
-        if(!pContext.getLevel().isClientSide() && !pContext.getPlayer().isCrouching())
+        ItemStack stack = pContext.getItemInHand();
+        CompoundTag Tag = stack.getOrCreateTag();
+        BlockPos Pos = pContext.getClickedPos();
+        if(!pContext.getPlayer().isCrouching() && pContext.getLevel().getBlockState(Pos).getBlock() == blockinit.BLUE_EXPLOSIVE.get())
         {
-            ItemStack stack = pContext.getItemInHand();
-            CompoundTag Tag = stack.getTag();
-            BlockPos Position = pContext.getClickedPos();
-            // Check If Tag Is Null //
-            if(Tag == null)
+            String Position = Pos.getX() + "," + Pos.getY() + "," + Pos.getZ();
+            if(Tag.contains("Targets"))
             {
-                Tag = new CompoundTag();
-            }
-            // Check if block is C4 //
-            if(pContext.getLevel().getBlockState(pContext.getClickedPos()).getBlock() == blockinit.BLUE_EXPLOSIVE.get())
-            {
-                // Check If The Target Key Exists
-                if (!Tag.contains("Targets")) {
-                    String Arr = Position.getX() + "," + Position.getY() + "," + Position.getZ();
-                    Tag.putString("Targets", Arr);
+                ListTag Targets = Tag.getList("Targets",8);
+                MCPaintball.LOG.info("Current Position: " + Position);
+                MCPaintball.LOG.info("Positions: " + Targets);
+                StringTag T = StringTag.valueOf(Position);
+                if(Targets.contains(T))
+                {
+                    MCPaintball.LOG.info("Contains Position");
+                    pContext.getLevel().playSound(pContext.getPlayer(),pContext.getPlayer().blockPosition(),soundinit.REM.get(),SoundSource.PLAYERS,0.5f,1f);
+                    Targets.remove(T);
+                    Tag.put("Targets",Targets);
                 }
-                // Update The Target Key With New Position //
                 else
                 {
-                    String Arr = Tag.getString("Targets");
-                    Arr += "/";
-                    Arr += Position.getX() + "," + Position.getY() + "," + Position.getZ();
-                    Tag.putString("Targets", Arr);
+                    MCPaintball.LOG.info("Does Not Contain Position");
+                    pContext.getLevel().playSound(pContext.getPlayer(),pContext.getPlayer().blockPosition(),soundinit.SET.get(),SoundSource.PLAYERS,0.5f,1f);
+                    Targets.add(T);
+                    Tag.put("Targets",Targets);
                 }
-                // Save Tag To Stack //
-                stack.setTag(Tag);
             }
-        }
-        else
-        {
-            if(pContext.getLevel().getBlockState(pContext.getClickedPos()).getBlock() == blockinit.BLUE_EXPLOSIVE.get())
+            else
             {
-                pContext.getLevel().playSound(pContext.getPlayer(),pContext.getPlayer().getOnPos(),soundinit.SET.get(),SoundSource.PLAYERS,0.5f,1.0f);
+                pContext.getLevel().playSound(pContext.getPlayer(),pContext.getPlayer().blockPosition(),soundinit.SET.get(),SoundSource.PLAYERS,0.5f,1f);
+                ListTag Targets = new ListTag();
+                Targets.add(StringTag.valueOf(Position));
+                Tag.put("Targets",Targets);
             }
         }
-        return InteractionResult.PASS;
+        stack.setTag(Tag);
+        return super.useOn(pContext);
     }
 }
