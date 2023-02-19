@@ -2,7 +2,6 @@ package org.multicoder.mcpaintball.init;
 
 
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,7 +21,6 @@ public class blockinit
     public static final RegistryObject<Block> RED_EXPLOSIVE = registerBlock("utility/red_explosive", RedExplosive::new);
     public static final RegistryObject<Block> BLUE_EXPLOSIVE = registerBlock("utility/blue_explosive", BlueExplosive::new);
     public static final RegistryObject<Block> GREEN_EXPLOSIVE = registerBlock("utility/green_explosive", GreenExplosive::new);
-
 
 
 

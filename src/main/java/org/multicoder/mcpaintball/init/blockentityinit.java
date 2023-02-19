@@ -9,5 +9,4 @@ public class blockentityinit
 {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MCPaintball.MODID);
 
-
 }

@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball.init;
 
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.*;
 import org.multicoder.mcpaintball.MCPaintball;
@@ -8,7 +7,15 @@ import org.multicoder.mcpaintball.item.armor.boots.*;
 import org.multicoder.mcpaintball.item.armor.chestplate.*;
 import org.multicoder.mcpaintball.item.armor.helmet.*;
 import org.multicoder.mcpaintball.item.armor.leggings.*;
-import org.multicoder.mcpaintball.item.utility.*;
+import org.multicoder.mcpaintball.item.utility.crafting.BlueWeaponBase;
+import org.multicoder.mcpaintball.item.utility.crafting.GreenWeaponBase;
+import org.multicoder.mcpaintball.item.utility.crafting.RedWeaponBase;
+import org.multicoder.mcpaintball.item.utility.extra.TabletItem;
+import org.multicoder.mcpaintball.item.utility.kits.*;
+import org.multicoder.mcpaintball.item.utility.remote.BlueRemote;
+import org.multicoder.mcpaintball.item.utility.remote.GreenRemote;
+import org.multicoder.mcpaintball.item.utility.remote.RedRemote;
+import org.multicoder.mcpaintball.item.weapons.bazooka.*;
 import org.multicoder.mcpaintball.item.weapons.pistol.*;
 import org.multicoder.mcpaintball.item.weapons.rifle.*;
 import org.multicoder.mcpaintball.item.weapons.shotgun.*;
@@ -31,6 +38,10 @@ public class iteminit
     public static final RegistryObject<Item> BLUE_RIFLE = ITEMS.register("weapon/rifle/blue_rifle", BlueRifleItem::new);
     public static final RegistryObject<Item> GREEN_RIFLE = ITEMS.register("weapon/rifle/green_rifle", GreenRifleItem::new);
 
+    public static final RegistryObject<Item> RED_BAZOOKA = ITEMS.register("weapon/bazooka/red_bazooka", RedBazookaItem::new);
+    public static final RegistryObject<Item> BLUE_BAZOOKA = ITEMS.register("weapon/bazooka/blue_bazooka", BlueBazookaItem::new);
+    public static final RegistryObject<Item> GREEN_BAZOOKA = ITEMS.register("weapon/bazooka/green_bazooka", GreenBazookaItem::new);
+
     //  Armor //
     public static final RegistryObject<Item> RED_BOOTS = ITEMS.register("armor/red_boots", RedBoots::new);
     public static final RegistryObject<Item> BLUE_BOOTS = ITEMS.register("armor/blue_boots", BlueBoots::new);
@@ -52,6 +63,28 @@ public class iteminit
     public static final RegistryObject<Item> RED_REMOTE = ITEMS.register("utility/red_remote", RedRemote::new);
     public static final RegistryObject<Item> BLUE_REMOTE = ITEMS.register("utility/blue_remote", BlueRemote::new);
     public static final RegistryObject<Item> GREEN_REMOTE = ITEMS.register("utility/green_remote", GreenRemote::new);
-    
+
+    //  Weapons Base //
+    public static final RegistryObject<Item> RED_WEAPONS_BASE = ITEMS.register("utility/crafting/red_weapon_base", RedWeaponBase::new);
+    public static final RegistryObject<Item> BLUE_WEAPONS_BASE = ITEMS.register("utility/crafting/blue_weapon_base", BlueWeaponBase::new);
+    public static final RegistryObject<Item> GREEN_WEAPONS_BASE = ITEMS.register("utility/crafting/green_weapon_base", GreenWeaponBase::new);
+
+    // Team Kits //
+    public static final RegistryObject<Item> RED_STANDARD = ITEMS.register("utility/kits/red_standard", RedTeamStandard::new);
+    public static final RegistryObject<Item> BLUE_STANDARD = ITEMS.register("utility/kits/blue_standard", BlueTeamStandard::new);
+    public static final RegistryObject<Item> GREEN_STANDARD = ITEMS.register("utility/kits/green_standard", GreenTeamStandard::new);
+
+    public static final RegistryObject<Item> RED_MEDIC = ITEMS.register("utility/kits/red_medic", RedTeamMedic::new);
+    public static final RegistryObject<Item> BLUE_MEDIC = ITEMS.register("utility/kits/blue_medic", BlueTeamMedic::new);
+    public static final RegistryObject<Item> GREEN_MEDIC = ITEMS.register("utility/kits/green_medic", GreenTeamMedic::new);
+
+    public static final RegistryObject<Item> RED_HEAVY = ITEMS.register("utility/kits/red_heavy", RedTeamHeavy::new);
+    public static final RegistryObject<Item> BLUE_HEAVY = ITEMS.register("utility/kits/blue_heavy", BlueTeamHeavy::new);
+    public static final RegistryObject<Item> GREEN_HEAVY = ITEMS.register("utility/kits/green_heavy", GreenTeamHeavy::new);
+
+    // Extra //
+    public static final RegistryObject<Item> TABLET = ITEMS.register("utility/extra/tablet", TabletItem::new);
+
+
 
 }

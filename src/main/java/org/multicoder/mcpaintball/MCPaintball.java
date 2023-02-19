@@ -12,10 +12,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.multicoder.mcpaintball.entity.BluePaintballArrowRenderer;
-import org.multicoder.mcpaintball.entity.GreenPaintballArrowRenderer;
-import org.multicoder.mcpaintball.entity.RedPaintballArrowRenderer;
+import org.multicoder.mcpaintball.entity.renderer.*;
 import org.multicoder.mcpaintball.init.*;
+import org.multicoder.mcpaintball.network.Networking;
 import org.multicoder.mcpaintball.util.BlockHolder;
 import org.multicoder.mcpaintball.util.config.MCPaintballConfig;
 
@@ -34,6 +33,7 @@ public class MCPaintball
         bus.addListener(this::addCreative);
         iteminit.ITEMS.register(bus);
         blockinit.BLOCKS.register(bus);
+        blockentityinit.BLOCK_ENTITIES.register(bus);
         entityinit.ENTITY_TYPES.register(bus);
         soundinit.SOUNDS.register(bus);
     }
@@ -45,12 +45,20 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType)entityinit.BLUE_PAINTBALL.get(), BluePaintballArrowRenderer::new);
         event.registerEntityRenderer((EntityType)entityinit.GREEN_PAINTBALL.get(), GreenPaintballArrowRenderer::new);
 
+        event.registerEntityRenderer((EntityType)entityinit.RED_PAINTBALL_HEAVY.get(), RedPaintballHeavyArrowRenderer::new);
+        event.registerEntityRenderer((EntityType)entityinit.BLUE_PAINTBALL_HEAVY.get(), BluePaintballHeavyArrowRenderer::new);
+        event.registerEntityRenderer((EntityType)entityinit.GREEN_PAINTBALL_HEAVY.get(), GreenPaintballHeavyArrowRenderer::new);
+
     }
 
     private void OnCommon(FMLCommonSetupEvent event)
     {
-        BlockHolder.AppendList();
+        event.enqueueWork(() -> {
+            BlockHolder.AppendList();
+            Networking.Register();
+        });
     }
+
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
@@ -84,13 +92,36 @@ public class MCPaintball
             event.accept(iteminit.BLUE_SHOTGUN.get());
             event.accept(iteminit.GREEN_SHOTGUN.get());
 
+            event.accept(iteminit.RED_BAZOOKA.get());
+            event.accept(iteminit.BLUE_BAZOOKA.get());
+            event.accept(iteminit.GREEN_BAZOOKA.get());
+
             event.accept(iteminit.RED_REMOTE.get());
             event.accept(iteminit.BLUE_REMOTE.get());
             event.accept(iteminit.GREEN_REMOTE.get());
 
+
+            event.accept(iteminit.RED_WEAPONS_BASE.get());
+            event.accept(iteminit.BLUE_WEAPONS_BASE.get());
+            event.accept(iteminit.GREEN_WEAPONS_BASE.get());
+
+            event.accept(iteminit.RED_STANDARD.get());
+            event.accept(iteminit.BLUE_STANDARD.get());
+            event.accept(iteminit.GREEN_STANDARD.get());
+
+            event.accept(iteminit.RED_MEDIC.get());
+            event.accept(iteminit.BLUE_MEDIC.get());
+            event.accept(iteminit.GREEN_MEDIC.get());
+
+            event.accept(iteminit.RED_HEAVY.get());
+            event.accept(iteminit.BLUE_HEAVY.get());
+            event.accept(iteminit.GREEN_HEAVY.get());
+
             event.accept(blockinit.RED_EXPLOSIVE.get().asItem());
             event.accept(blockinit.BLUE_EXPLOSIVE.get().asItem());
             event.accept(blockinit.GREEN_EXPLOSIVE.get().asItem());
+
+            event.accept(iteminit.TABLET.get());
 
         }
     }

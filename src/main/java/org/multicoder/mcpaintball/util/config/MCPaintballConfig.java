@@ -16,6 +16,7 @@ public class MCPaintballConfig
     public static ForgeConfigSpec.DoubleValue PISTOL_INACCURACY;
     public static ForgeConfigSpec.DoubleValue SHOTGUN_INACCURACY;
     public static ForgeConfigSpec.DoubleValue RIFLE_INACCURACY;
+    public static ForgeConfigSpec.DoubleValue BAZOOKA_INACCURACY;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> BREAKABLES;
 
     static{
@@ -30,6 +31,7 @@ public class MCPaintballConfig
         PISTOL_INACCURACY = BUILDER.comment("The Inaccuracy Of The Pistol, Lower The Better").defineInRange("pistol_accuracy",0.5,0.0,1.0);
         SHOTGUN_INACCURACY = BUILDER.comment("The Inaccuracy Of The Shotgun, Lower The Better").defineInRange("shotgun_accuracy",0.5,0.0,1.0);
         RIFLE_INACCURACY = BUILDER.comment("The Inaccuracy Of The Rifle, Lower The Better").defineInRange("rifle_accuracy",1.5,0.0,3.0);
+        BAZOOKA_INACCURACY = BUILDER.comment("The Inaccuracy Of The Bazooka, Lower The Better").defineInRange("rifle_accuracy",2.3,0.0,4.0);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }

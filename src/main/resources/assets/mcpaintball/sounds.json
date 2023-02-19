@@ -5,6 +5,12 @@
       "mcpaintball:single"
     ]
   },
+  "bazooka": {
+    "subtitle": "subtitle.mcpaintball.bazooka",
+    "sounds": [
+      "mcpaintball:bazooka"
+    ]
+  },
   "ding": {
     "subtitle": "subtitle.mcpaintball.ding",
     "sounds": [

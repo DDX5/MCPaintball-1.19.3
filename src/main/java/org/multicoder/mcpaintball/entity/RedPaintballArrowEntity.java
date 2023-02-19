@@ -1,7 +1,9 @@
 package org.multicoder.mcpaintball.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,8 +16,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.multicoder.mcpaintball.capability.PlayerTeamCapabilityProvider;
 import org.multicoder.mcpaintball.init.entityinit;
 import org.multicoder.mcpaintball.init.soundinit;
+import org.multicoder.mcpaintball.network.Networking;
+import org.multicoder.mcpaintball.network.packets.TeamPointS2CPacket;
 import org.multicoder.mcpaintball.util.BlockHolder;
 
 public class RedPaintballArrowEntity extends AbstractArrow
@@ -41,12 +46,14 @@ public class RedPaintballArrowEntity extends AbstractArrow
     @Override
     protected void onHitEntity(EntityHitResult p_36757_)
     {
-        if(level.isClientSide)
-        {
-            if (p_36757_.getEntity() instanceof Cow)
-            {
-                Player player = (Player) getOwner();
-                player.playSound(soundinit.DING.get());
+        if(!level.isClientSide) {
+            if (p_36757_.getEntity() instanceof ServerPlayer) {
+                ServerPlayer player = (ServerPlayer) getOwner();
+                level.playSound(null,player.blockPosition(),soundinit.DING.get(), SoundSource.PLAYERS);
+                player.getCapability(PlayerTeamCapabilityProvider.CAPABILITY).ifPresent(cap ->{
+                    cap.IncPoints();
+                    Networking.sendToPlayer(new TeamPointS2CPacket(cap.GetPoints()),player);
+                });
             }
             this.discard();
         }

@@ -12,6 +12,10 @@
   "item.mcpaintball.weapon.rifle.blue_rifle": "Blue Team Rifle",
   "item.mcpaintball.weapon.rifle.red_rifle": "Red Team Rifle",
 
+  "item.mcpaintball.weapon.bazooka.green_bazooka": "Green Team Bazooka",
+  "item.mcpaintball.weapon.bazooka.blue_bazooka": "Blue Team Bazooka",
+  "item.mcpaintball.weapon.bazooka.red_bazooka": "Red Team Bazooka",
+
   "item.mcpaintball.armor.red_boots": "Red Team Boots",
   "item.mcpaintball.armor.blue_boots": "Blue Team Boots",
   "item.mcpaintball.armor.green_boots": "Green Team Boots",
@@ -32,6 +36,28 @@
   "item.mcpaintball.utility.green_remote": "Green Team Remote Detonator",
   "item.mcpaintball.utility.blue_remote": "Blue Team Remote Detonator",
 
+  "item.mcpaintball.utility.red_radio": "Red Team Radio",
+  "item.mcpaintball.utility.green_radio": "Green Team Radio",
+  "item.mcpaintball.utility.blue_radio": "Blue Team Radio",
+
+  "item.mcpaintball.utility.crafting.red_weapon_base": "Red Team Weapon Base",
+  "item.mcpaintball.utility.crafting.green_weapon_base": "Green Team Weapon Base",
+  "item.mcpaintball.utility.crafting.blue_weapon_base": "Blue Team Weapon Base",
+
+  "item.mcpaintball.utility.kits.red_standard": "Red Team Standard Class Kit",
+  "item.mcpaintball.utility.kits.green_standard": "Green Team Standard Class Kit",
+  "item.mcpaintball.utility.kits.blue_standard": "Blue Team Standard Class Kit",
+
+  "item.mcpaintball.utility.kits.red_medic": "Red Team Medic Class Kit",
+  "item.mcpaintball.utility.kits.green_medic": "Green Team Medic Class Kit",
+  "item.mcpaintball.utility.kits.blue_medic": "Blue Team Medic Class Kit",
+
+  "item.mcpaintball.utility.kits.red_heavy": "Red Team Heavy Class Kit",
+  "item.mcpaintball.utility.kits.green_heavy": "Green Team Heavy Class Kit",
+  "item.mcpaintball.utility.kits.blue_heavy": "Blue Team Heavy Class Kit",
+
+  "item.mcpaintball.utility.extra.tablet": "Tablet",
+
   "Comment": "Entities",
   "entity.mcpaintball.red_paintball": "Red Paintball",
   "entity.mcpaintball.blue_paintball": "Blue Paintball",
@@ -48,9 +74,20 @@
 
   "Comment": "Subtitles",
   "subtitle.mcpaintball.single": "Paintball Fired",
+  "subtitle.mcpaintball.bazooka": "Bazooka Fired",
   "subtitle.mcpaintball.ding": "Shot Hit",
   "subtitle.mcpaintball.splat": "Paintball Splat",
   "subtitle.mcpaintball.set": "C4 Target Added",
   "subtitle.mcpaintball.rem": "C4 Target Removed",
-  "subtitle.mcpaintball.det": "Detonate C4"
+  "subtitle.mcpaintball.det": "Detonate C4",
+  "subtitle.mcpaintball.assist": "Call For Help",
+  "subtitle.mcpaintball.medic": "Call For Medic",
+
+  "Comment":"Text",
+  "text.mcpaintball.crafting": "Crafting Item",
+
+  "Comment": "Key Bindings",
+  "key.category.mcpaintball": "MCPaintball Radio",
+  "key.mcpaintball.assist": "Call For Help",
+  "key.mcpaintball.medic": "Call For Medic"
 }

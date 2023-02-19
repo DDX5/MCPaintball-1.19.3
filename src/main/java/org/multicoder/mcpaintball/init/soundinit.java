@@ -12,6 +12,7 @@ public class soundinit
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MCPaintball.MODID);
 
     public static final RegistryObject<SoundEvent> SINGLE_SHOT = RegSound("single");
+    public static final RegistryObject<SoundEvent> BAZOOKA = RegSound("bazooka");
 
     public static final RegistryObject<SoundEvent> DING = RegSound("ding");
     public static final RegistryObject<SoundEvent> SPLAT = RegSound("splat");
