@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.block.blockitem.ExplosiveBlockItem;
 import org.multicoder.mcpaintball.block.explosive.BlueExplosive;
 import org.multicoder.mcpaintball.block.explosive.GreenExplosive;
 import org.multicoder.mcpaintball.block.explosive.RedExplosive;
@@ -31,7 +32,6 @@ public class blockinit
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return iteminit.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties()));
+        return iteminit.ITEMS.register(name, () -> new ExplosiveBlockItem(block.get()));
     }
 }
