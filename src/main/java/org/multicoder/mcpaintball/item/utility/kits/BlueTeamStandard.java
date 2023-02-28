@@ -41,6 +41,7 @@ public class BlueTeamStandard extends Item
             player.drop(new ItemStack(iteminit.BLUE_PISTOL.get()), true);
             player.drop(new ItemStack(iteminit.BLUE_REMOTE.get()), true);
             player.drop(new ItemStack(iteminit.TABLET.get()),true);
+            player.drop(new ItemStack(iteminit.BLUE_GRENADE.get(),48),true);
             player.getItemInHand(pUsedHand).shrink(1);
             player.getCapability(PlayerTeamCapabilityProvider.CAPABILITY).ifPresent(cap ->{
                 cap.ResetAll();

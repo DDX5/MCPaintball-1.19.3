@@ -3,10 +3,13 @@ package org.multicoder.mcpaintball.event;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -32,11 +35,17 @@ public class MCPaintballEvents
         event.register(PlayerTeamCapability.class);
     }
     @SubscribeEvent
-    public static void onPlayerCloned(PlayerEvent.Clone event) {
-        if(event.isWasDeath()) {
-            event.getOriginal().getCapability(PlayerTeamCapabilityProvider.CAPABILITY).ifPresent(oldStore -> {
-                event.getOriginal().getCapability(PlayerTeamCapabilityProvider.CAPABILITY).ifPresent(newStore -> {
+    public static void onPlayerCloned(PlayerEvent.Clone event)
+    {
+        if(event.isWasDeath())
+        {
+            event.getOriginal().reviveCaps();
+            event.getOriginal().getCapability(PlayerTeamCapabilityProvider.CAPABILITY).ifPresent(oldStore ->
+            {
+                event.getEntity().getCapability(PlayerTeamCapabilityProvider.CAPABILITY).ifPresent(newStore ->
+                {
                     newStore.CopyFrom(oldStore);
+                    event.getOriginal().invalidateCaps();
                 });
             });
         }
